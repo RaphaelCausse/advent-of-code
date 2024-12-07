@@ -2,7 +2,11 @@ SOURCES := day02.c
 
 INCLUDES := ..
 
+ifeq ($(OS),Windows_NT)
+TARGET := $(SOURCES:.c=.exe)
+else
 TARGET := $(SOURCES:.c=.out)
+endif
 
 ## COMPILER ###############################################
 
@@ -19,6 +23,14 @@ else
     Q :=
 endif
 
+## SHELL ##################################################
+
+ifeq ($(OS),Windows_NT)
+RM := del /f/q
+else
+RM := rm -f
+endif
+
 ## RULES ##################################################
 
 .PHONY: all test clean run
@@ -33,7 +45,7 @@ test: CPPFLAGS += -DTEST
 test: $(TARGET)
 
 clean:
-	$(Q)rm -f $(TARGET)
+	$(Q)$(RM) $(TARGET)
 
 run: $(TARGET)
 	@./$(TARGET)
