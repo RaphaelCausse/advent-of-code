@@ -66,45 +66,41 @@ err_t read_input(void)
     return AOC_OK;
 }
 
-err_t solve_part_one(void)
+bool is_safe_report(int32_t levels[], size_t num_levels)
 {
-    uint32_t count_safe_reports = 0;
-    bool safe_report = true;
+    int32_t diff;
     uint8_t num_pos = 0;
     uint8_t num_neg = 0;
 
+    for (size_t i = 0; i < num_levels - 1; i++)
+    {
+        diff = levels[i + 1] - levels[i];
+
+        if (diff > 0)
+        {
+            num_pos++;
+        }
+        else if (diff < 0)
+        {
+            num_neg++;
+        }
+
+        if (abs(diff) < DIFF_MIN || abs(diff) > DIFF_MAX)
+        {
+            return false;
+        }
+    }
+
+    return (num_pos == 0 || num_neg == 0);
+}
+
+err_t solve_part_one(void)
+{
+    uint32_t count_safe_reports = 0;
+
     for (size_t r = 0; r < num_reports; r++)
     {
-        safe_report = true;
-        num_pos = 0;
-        num_neg = 0;
-
-        for (size_t i = 0; i < report_lengths[r] - 1; i++)
-        {
-            int32_t diff = reports[r][i + 1] - reports[r][i];
-
-            if (diff > 0)
-            {
-                num_pos++;
-            }
-            else if (diff < 0)
-            {
-                num_neg++;
-            }
-
-            if (abs(diff) < DIFF_MIN || abs(diff) > DIFF_MAX)
-            {
-                safe_report = false;
-                break;
-            }
-        }
-
-        if (!(num_pos == 0 || num_neg == 0))
-        {
-            safe_report = false;
-        }
-
-        if (safe_report)
+        if (is_safe_report(reports[r], report_lengths[r]))
         {
             count_safe_reports++;
         }
@@ -117,7 +113,20 @@ err_t solve_part_one(void)
 
 err_t solve_part_two(void)
 {
-    /* TODO */
+    uint32_t count_safe_reports = 0;
+
+    for (size_t r = 0; r < num_reports; r++)
+    {
+        if (is_safe_report(reports[r], report_lengths[r]))
+        {
+            count_safe_reports++;
+        }
+    }
+
+    /* TODO: Problem Dampener */
+
+    // printf("output: %u\n", count_safe_reports);
+    printf("INFO: solve_part_two not implemented !\n");
 
     return AOC_OK;
 }
