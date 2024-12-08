@@ -30,7 +30,7 @@ err_t read_input(void)
     if (input_file == NULL)
     {
         printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno));
-        return E_ERROR;
+        return AOC_ERROR;
     }
 
     while (fscanf(input_file, "%u   %u\n", &left[length], &right[length]) != EOF)
@@ -41,10 +41,10 @@ err_t read_input(void)
     if (fclose(input_file) != 0)
     {
         printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno));
-        return E_ERROR;
+        return AOC_ERROR;
     }
 
-    return E_OK;
+    return AOC_OK;
 }
 
 int compare(const void *first, const void *second)
@@ -69,7 +69,7 @@ err_t solve_part_one(void)
 
     printf("output: %u\n", sum);
 
-    return E_OK;
+    return AOC_OK;
 }
 
 err_t solve_part_two(void)
@@ -105,25 +105,25 @@ err_t solve_part_two(void)
 
     printf("output: %u\n", similarity);
 
-    return E_OK;
+    return AOC_OK;
 }
 
 int main(void)
 {
-    if (read_input() == E_ERROR)
+    if (read_input() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
 
     BANNER_START(AOC_DAY, 1);
-    if (solve_part_one() == E_ERROR)
+    if (solve_part_one() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
     BANNER_END();
 
     BANNER_START(AOC_DAY, 2);
-    if (solve_part_two() == E_ERROR)
+    if (solve_part_two() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }

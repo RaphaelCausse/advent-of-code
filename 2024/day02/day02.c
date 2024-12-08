@@ -12,7 +12,7 @@
 
 #define AOC_DAY 2
 
-#define NUM_LEVEL 100
+#define NUM_LEVEL 32
 
 #define DIFF_MIN 1
 #define DIFF_MAX 3
@@ -36,7 +36,7 @@ err_t solve_part_one(void)
     if (input_file == NULL)
     {
         printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno));
-        return E_ERROR;
+        return AOC_ERROR;
     }
 
     while (!feof(input_file))
@@ -94,30 +94,30 @@ err_t solve_part_one(void)
     if (fclose(input_file) != 0)
     {
         printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno));
-        return E_ERROR;
+        return AOC_ERROR;
     }
 
-    return E_OK;
+    return AOC_OK;
 }
 
 err_t solve_part_two(void)
 {
     /* TODO */
 
-    return E_OK;
+    return AOC_OK;
 }
 
 int main(void)
 {
     BANNER_START(AOC_DAY, 1);
-    if (solve_part_one() == E_ERROR)
+    if (solve_part_one() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
     BANNER_END();
 
     BANNER_START(AOC_DAY, 2);
-    if (solve_part_two() == E_ERROR)
+    if (solve_part_two() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }

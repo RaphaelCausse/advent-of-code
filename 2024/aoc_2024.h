@@ -35,8 +35,8 @@
 
 typedef enum
 {
-    E_ERROR = -1,
-    E_OK = 0,
+    AOC_ERROR = -1,
+    AOC_OK = 0,
 } err_t;
 
 #endif /* _AOC_2024_H_ */
