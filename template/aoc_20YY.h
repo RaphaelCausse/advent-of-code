@@ -31,6 +31,8 @@
 #define BANNER_START(day, part) (printf("========== AOC %d - day %02d - part %d ==========\n", AOC_YEAR, day, part))
 #define BANNER_END() (printf("================================================\n\n"))
 
+#define LOG_ERROR_FILE() (printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
+
 /***** Types *****************************************************************/
 
 typedef enum

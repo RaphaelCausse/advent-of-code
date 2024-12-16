@@ -23,7 +23,7 @@ err_t read_input(void)
     input_file = fopen(INPUT_FILE, "r");
     if (input_file == NULL)
     {
-        printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno));
+        LOG_ERROR_FILE();
         return AOC_ERROR;
     }
 
@@ -31,7 +31,7 @@ err_t read_input(void)
 
     if (fclose(input_file) != 0)
     {
-        printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno));
+        LOG_ERROR_FILE();
         return AOC_ERROR;
     }
 
