@@ -27,7 +27,7 @@ err_t read_input(void)
         return AOC_ERROR;
     }
 
-    printf("INFO: read_input not implemented !\n");
+    LOG_WARN_NOT_IMPLEMENTED();
 
     if (fclose(input_file) != 0)
     {
@@ -40,14 +40,14 @@ err_t read_input(void)
 
 err_t solve_part_one(void)
 {
-    printf("INFO: solve_part_one not implemented !\n");
+    LOG_WARN_NOT_IMPLEMENTED();
 
     return AOC_OK;
 }
 
 err_t solve_part_two(void)
 {
-    printf("INFO: solve_part_two not implemented !\n");
+    LOG_WARN_NOT_IMPLEMENTED();
 
     return AOC_OK;
 }

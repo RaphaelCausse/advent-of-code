@@ -33,6 +33,8 @@
 
 #define LOG_ERROR_FILE() (printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
 
+#define LOG_WARN_NOT_IMPLEMENTED() (printf("WARN\t%s: not implemented\n", __func__))
+
 /***** Types *****************************************************************/
 
 typedef enum
