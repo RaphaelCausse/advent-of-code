@@ -18,7 +18,10 @@
 
 /***** Definitions ***********************************************************/
 
-#define AOC_YEAR 2099
+#define AOC_YEAR -1
+
+#define AOC_PART_1 1
+#define AOC_PART_2 2
 
 #ifdef TEST
 #define INPUT_FILE "tests/test.txt"

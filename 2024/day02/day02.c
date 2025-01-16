@@ -165,14 +165,14 @@ int main(void)
         return EXIT_FAILURE;
     }
 
-    BANNER_START(AOC_DAY, 1);
+    BANNER_START(AOC_DAY, AOC_PART_1);
     if (solve_part_one() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
     BANNER_END();
 
-    BANNER_START(AOC_DAY, 2);
+    BANNER_START(AOC_DAY, AOC_PART_2);
     if (solve_part_two() == AOC_ERROR)
     {
         return EXIT_FAILURE;
