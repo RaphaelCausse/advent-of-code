@@ -15,6 +15,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <errno.h>
+#include <time.h>
 
 /***** Definitions ***********************************************************/
 
@@ -31,12 +32,8 @@
 
 /***** Macros ****************************************************************/
 
-#define BANNER_START(day, part) (printf("========== AOC %d - day %02d - part %d ==========\n", AOC_YEAR, day, part))
-#define BANNER_END() (printf("================================================\n\n"))
-
-#define LOG_ERROR_FILE() (printf("ERROR\t%s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
-
-#define LOG_WARN_NOT_IMPLEMENTED() (printf("WARN\t%s: not implemented\n", __func__))
+#define LOG_ERROR_FILE() (printf("[ERROR] %s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
+#define LOG_WARN_NOT_IMPLEMENTED() (printf("[WARNING] %s: not implemented\n", __func__))
 
 /***** Types *****************************************************************/
 
@@ -44,6 +41,36 @@ typedef enum
 {
     AOC_ERROR = false,
     AOC_SUCCESS = true,
-} err_t;
+} aoc_status_t;
+
+typedef struct
+{
+    clock_t start_time;
+    clock_t end_time;
+} aoc_timer_t;
+
+/***** Functions *************************************************************/
+
+static inline void aoc_banner_start(int day, int part)
+{
+    printf("================ AOC %d - DAY %02d - PART %d ================\n", AOC_YEAR, day, part);
+}
+
+static inline void aoc_banner_end(void)
+{
+    printf("============================================================\n\n");
+}
+
+static inline void aoc_timer_start(aoc_timer_t *t)
+{
+    t->start_time = clock();
+}
+
+static inline void aoc_timer_end(aoc_timer_t *t)
+{
+    t->end_time = clock();
+    double elapsed = (double)(t->end_time - t->start_time) / CLOCKS_PER_SEC;
+    printf("Execution time: %.6f seconds\n", elapsed);
+}
 
 #endif /* _AOC_20YY_H_ */

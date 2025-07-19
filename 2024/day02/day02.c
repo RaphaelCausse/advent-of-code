@@ -26,7 +26,7 @@ size_t report_lengths[MAX_REPORTS] = {0};
 
 /***** Functions *************************************************************/
 
-err_t read_input(void)
+aoc_status_t read_input(void)
 {
     FILE *input_file;
     size_t num_levels = 0;
@@ -94,7 +94,7 @@ bool is_report_safe(int32_t levels[], size_t num_levels)
     return (num_pos == 0 || num_neg == 0);
 }
 
-err_t solve_part_one(void)
+aoc_status_t solve_part_one(void)
 {
     uint32_t count_safe_reports = 0;
 
@@ -111,7 +111,7 @@ err_t solve_part_one(void)
     return AOC_SUCCESS;
 }
 
-err_t solve_part_two(void)
+aoc_status_t solve_part_two(void)
 {
     uint32_t count_safe_reports = 0;
     bool safe_with_dampener = false;
@@ -158,26 +158,34 @@ err_t solve_part_two(void)
     return AOC_SUCCESS;
 }
 
+/***** Main ******************************************************************/
+
 int main(void)
 {
+    aoc_timer_t timer;
+
     if (read_input() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
 
-    BANNER_START(AOC_DAY, AOC_PART_1);
+    aoc_banner_start(AOC_DAY, AOC_PART_1);
+    aoc_timer_start(&timer);
     if (solve_part_one() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
-    BANNER_END();
+    aoc_timer_end(&timer);
+    aoc_banner_end();
 
-    BANNER_START(AOC_DAY, AOC_PART_2);
+    aoc_banner_start(AOC_DAY, AOC_PART_2);
+    aoc_timer_start(&timer);
     if (solve_part_two() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
-    BANNER_END();
+    aoc_timer_end(&timer);
+    aoc_banner_end();
 
     return EXIT_SUCCESS;
 }

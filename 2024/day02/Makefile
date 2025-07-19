@@ -1,6 +1,7 @@
 SOURCES := day02.c
+DEPENDANCIES := $(SOURCES:.c=.d)
 
-INCLUDES := ..
+INCLUDE_DIRS := ..
 
 ifeq ($(OS),Windows_NT)
 TARGET := $(SOURCES:.c=.exe)
@@ -12,7 +13,8 @@ endif
 
 CC := gcc
 CFLAGS := -std=c99 -O2 -Wall -Wextra -pedantic
-CPPFLAGS := -I$(INCLUDES)
+CPPFLAGS := -I$(INCLUDE_DIRS)
+DEPSFLAGS := -MMD -MP
 
 ## VERBOSITY ##############################################
 
@@ -39,13 +41,15 @@ all: $(TARGET)
 
 $(TARGET): $(SOURCES)
 	@echo "Building target $(TARGET) ..."
-	$(Q)$(CC) $(CPPFLAGS) $(CFLAGS) $^ -o $@
+	$(Q)$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPSFLAGS) $^ -o $@
 
 test: CPPFLAGS += -DTEST
 test: $(TARGET)
 
 clean:
-	$(Q)$(RM) $(TARGET)
+	$(Q)$(RM) $(TARGET) $(DEPENDANCIES)
 
 run: $(TARGET)
 	@./$(TARGET)
+
+-include $(DEPENDANCIES)

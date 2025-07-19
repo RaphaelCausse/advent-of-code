@@ -16,7 +16,7 @@
 
 /***** Functions *************************************************************/
 
-err_t read_input(void)
+aoc_status_t read_input(void)
 {
     FILE *input_file;
 
@@ -38,14 +38,14 @@ err_t read_input(void)
     return AOC_SUCCESS;
 }
 
-err_t solve_part_one(void)
+aoc_status_t solve_part_one(void)
 {
     LOG_WARN_NOT_IMPLEMENTED();
 
     return AOC_SUCCESS;
 }
 
-err_t solve_part_two(void)
+aoc_status_t solve_part_two(void)
 {
     LOG_WARN_NOT_IMPLEMENTED();
 
@@ -56,24 +56,30 @@ err_t solve_part_two(void)
 
 int main(void)
 {
+    aoc_timer_t timer;
+
     if (read_input() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
 
-    BANNER_START(AOC_DAY, AOC_PART_1);
+    aoc_banner_start(AOC_DAY, AOC_PART_1);
+    aoc_timer_start(&timer);
     if (solve_part_one() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
-    BANNER_END();
+    aoc_timer_end(&timer);
+    aoc_banner_end();
 
-    BANNER_START(AOC_DAY, AOC_PART_2);
+    aoc_banner_start(AOC_DAY, AOC_PART_2);
+    aoc_timer_start(&timer);
     if (solve_part_two() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
-    BANNER_END();
+    aoc_timer_end(&timer);
+    aoc_banner_end();
 
     return EXIT_SUCCESS;
 }

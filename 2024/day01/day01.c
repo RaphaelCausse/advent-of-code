@@ -17,12 +17,12 @@
 /***** Globals ***************************************************************/
 
 size_t length = 0;
-uint32_t left[ARRAY_MAX] = {0};
-uint32_t right[ARRAY_MAX] = {0};
+int32_t left[ARRAY_MAX] = {0};
+int32_t right[ARRAY_MAX] = {0};
 
 /***** Functions *************************************************************/
 
-err_t read_input(void)
+aoc_status_t read_input(void)
 {
     FILE *input_file;
 
@@ -33,7 +33,7 @@ err_t read_input(void)
         return AOC_ERROR;
     }
 
-    while (fscanf(input_file, "%u   %u\n", &left[length], &right[length]) != EOF)
+    while (fscanf(input_file, "%d   %d\n", &left[length], &right[length]) != EOF)
     {
         length++;
     }
@@ -49,12 +49,12 @@ err_t read_input(void)
 
 int compare(const void *first, const void *second)
 {
-    uint32_t first_value = *(uint32_t *)first;
-    uint32_t second_value = *(uint32_t *)second;
+    int32_t first_value = *(int32_t *)first;
+    int32_t second_value = *(int32_t *)second;
     return first_value - second_value;
 }
 
-err_t solve_part_one(void)
+aoc_status_t solve_part_one(void)
 {
     uint32_t sum = 0;
 
@@ -72,7 +72,7 @@ err_t solve_part_one(void)
     return AOC_SUCCESS;
 }
 
-err_t solve_part_two(void)
+aoc_status_t solve_part_two(void)
 {
     uint32_t similarity = 0;
     uint32_t count = 0;
@@ -108,26 +108,34 @@ err_t solve_part_two(void)
     return AOC_SUCCESS;
 }
 
+/***** Main ******************************************************************/
+
 int main(void)
 {
+    aoc_timer_t timer;
+
     if (read_input() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
 
-    BANNER_START(AOC_DAY, AOC_PART_1);
+    aoc_banner_start(AOC_DAY, AOC_PART_1);
+    aoc_timer_start(&timer);
     if (solve_part_one() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
-    BANNER_END();
+    aoc_timer_end(&timer);
+    aoc_banner_end();
 
-    BANNER_START(AOC_DAY, AOC_PART_2);
+    aoc_banner_start(AOC_DAY, AOC_PART_2);
+    aoc_timer_start(&timer);
     if (solve_part_two() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
-    BANNER_END();
+    aoc_timer_end(&timer);
+    aoc_banner_end();
 
     return EXIT_SUCCESS;
 }
