@@ -1,6 +1,6 @@
 /******************************************************************************
  * @file aoc_2024.h
- * @brief Header for Advent of Code 2024.
+ * @brief Header for Advent of Code Year 2024.
  * @author Raphael CAUSSE
  *****************************************************************************/
 
@@ -42,8 +42,8 @@
 
 typedef enum
 {
-    AOC_ERROR = -1,
-    AOC_OK = 0,
+    AOC_ERROR = false,
+    AOC_SUCCESS = true,
 } err_t;
 
 #endif /* _AOC_2024_H_ */

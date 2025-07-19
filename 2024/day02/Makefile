@@ -11,7 +11,7 @@ endif
 ## COMPILER ###############################################
 
 CC := gcc
-CFLAGS := -std=c99 -O2 -Wall
+CFLAGS := -std=c99 -O2 -Wall -Wextra -pedantic
 CPPFLAGS := -I$(INCLUDES)
 
 ## VERBOSITY ##############################################

@@ -1,6 +1,6 @@
 /******************************************************************************
  * @file aoc_20YY.h
- * @brief Header for Advent of Code 20YY.
+ * @brief Header for Advent of Code Year 20YY.
  * @author Raphael CAUSSE
  *****************************************************************************/
 
@@ -18,7 +18,7 @@
 
 /***** Definitions ***********************************************************/
 
-#define AOC_YEAR -1
+#define AOC_YEAR 0
 
 #define AOC_PART_1 1
 #define AOC_PART_2 2
@@ -42,8 +42,8 @@
 
 typedef enum
 {
-    AOC_ERROR = -1,
-    AOC_OK = 0,
+    AOC_ERROR = false,
+    AOC_SUCCESS = true,
 } err_t;
 
 #endif /* _AOC_20YY_H_ */

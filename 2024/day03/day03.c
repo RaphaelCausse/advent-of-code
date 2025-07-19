@@ -35,21 +35,21 @@ err_t read_input(void)
         return AOC_ERROR;
     }
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 err_t solve_part_one(void)
 {
     LOG_WARN_NOT_IMPLEMENTED();
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 err_t solve_part_two(void)
 {
     LOG_WARN_NOT_IMPLEMENTED();
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 int main(void)

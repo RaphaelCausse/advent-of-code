@@ -44,7 +44,7 @@ err_t read_input(void)
         return AOC_ERROR;
     }
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 int compare(const void *first, const void *second)
@@ -69,7 +69,7 @@ err_t solve_part_one(void)
 
     printf("output: %u\n", sum);
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 err_t solve_part_two(void)
@@ -105,7 +105,7 @@ err_t solve_part_two(void)
 
     printf("output: %u\n", similarity);
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 int main(void)

@@ -63,7 +63,7 @@ err_t read_input(void)
         return AOC_ERROR;
     }
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 bool is_report_safe(int32_t levels[], size_t num_levels)
@@ -108,7 +108,7 @@ err_t solve_part_one(void)
 
     printf("output: %u\n", count_safe_reports);
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 err_t solve_part_two(void)
@@ -155,7 +155,7 @@ err_t solve_part_two(void)
 
     printf("output: %u\n", count_safe_reports);
 
-    return AOC_OK;
+    return AOC_SUCCESS;
 }
 
 int main(void)
