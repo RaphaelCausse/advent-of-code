@@ -117,8 +117,9 @@ To add another year:
 1. Create a new directory with the correct year
 2. Copy all contents from the `template` directory into the new directory
 3. Edit the project name in `CMakeLists.txt` 
-4. Rename and edit the file `aoc_20YY.h` with the correct year, and edit the define `AOC_YEAR`
-5. Rename the day directories and source files, and edit the source file define `AOC_DAY`
+4. Edit the define `AOC_YEAR` in the header file `aoc.h`
+5. Rename the day directory and source file.
+6. Edit the define `AOC_DAY` in the source file.
 
 That's all — CMake will detect and build everything automatically.
 
