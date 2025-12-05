@@ -7,7 +7,7 @@ set(TARGET ${DAY_NAME})
 
 add_executable(${TARGET} ${SRC})
 
-target_include_directories(${TARGET} PRIVATE ${AOC_2024_INCLUDE_DIR})
+target_include_directories(${TARGET} PRIVATE ${AOC_INCLUDE_DIR})
 
 set_target_properties(${TARGET} PROPERTIES
     C_STANDARD 99
