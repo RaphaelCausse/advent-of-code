@@ -19,10 +19,10 @@
 
 /***** Definitions ***********************************************************/
 
-#define AOC_YEAR 2024
+#define AOC_YEAR (2024)
 
-#define AOC_PART_1 1
-#define AOC_PART_2 2
+#define AOC_PART_1 (1)
+#define AOC_PART_2 (2)
 
 #ifdef TEST
 #define INPUT_FILE "tests/test.txt"
@@ -32,8 +32,11 @@
 
 /***** Macros ****************************************************************/
 
-#define LOG_ERROR_FILE() (printf("[ERROR] %s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
-#define LOG_WARN_NOT_IMPLEMENTED() (printf("[WARNING] %s: not implemented\n", __func__))
+#define LOG_ERROR_FILE() \
+    (printf("[ERROR] %s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
+
+#define LOG_WARNING_NOT_IMPLEMENTED() \
+    (printf("[WARNING] %s: not implemented\n", __func__))
 
 /***** Types *****************************************************************/
 
@@ -41,36 +44,41 @@ typedef enum
 {
     AOC_ERROR = false,
     AOC_SUCCESS = true,
-} aoc_status_t;
+} t_aoc_status;
 
 typedef struct
 {
     clock_t start_time;
     clock_t end_time;
-} aoc_timer_t;
+} t_aoc_timer;
 
-/***** Functions *************************************************************/
+/***** Static Variables *************************************************************/
 
-static inline void aoc_banner_start(int day, int part)
+static t_aoc_timer _global_timer;
+
+/***** Static Functions *************************************************************/
+
+static void aoc_solve_start(int day, int part)
 {
-    printf("================ AOC %d - DAY %02d - PART %d ================\n", AOC_YEAR, day, part);
+    printf("================ A0C %d - Day %02d - Part %d ================\n", AOC_YEAR, day, part);
+
+    _global_timer.start_time = clock();
 }
 
-static inline void aoc_banner_end(void)
+static void aoc_solve_end(uint32_t result)
 {
+    _global_timer.start_time = clock();
+
+    double elapsed = (double)(_global_timer.end_time - _global_timer.start_time) / CLOCKS_PER_SEC;
+
+    printf("Result         : %u\n", result);
+    printf("Execution time : %.6f s\n", elapsed);
     printf("============================================================\n\n");
 }
 
-static inline void aoc_timer_start(aoc_timer_t *t)
-{
-    t->start_time = clock();
-}
+/***** Public Functions *************************************************************/
 
-static inline void aoc_timer_end(aoc_timer_t *t)
-{
-    t->end_time = clock();
-    double elapsed = (double)(t->end_time - t->start_time) / CLOCKS_PER_SEC;
-    printf("Execution time: %.6f seconds\n", elapsed);
-}
+extern t_aoc_status solve_part_one(void);
+extern t_aoc_status solve_part_two(void);
 
 #endif /* _AOC_2024_H_ */
