@@ -43,7 +43,7 @@ Each `day<XX>` directory:
 ### 1. Navigate to a specific year
 
 ```bash
-cd <YEAR_DIR>
+cd <YEAR>
 ```
 
 Each year is an independent CMake project.
@@ -73,7 +73,7 @@ This compiles all `day<XX>` executables.
 Because each solution expects to find its `tests/` folder, it must be executed **from its own directory**:
 
 ```bash
-cd <YEAR_DIR>/day<XX>
+cd <YEAR>/day<XX>
 ./day<XX>
 ```
 
@@ -107,15 +107,18 @@ cmake --build build
 ## Cleaning the Build
 
 Since CMake does not provide a project-wide `clean` rule, simply delete the build directory `build`.
+
 ---
 
 ## Adding a New Year
 
 To add another year:
 
-1. Copy the directory `template/20YY` at the root and rename it with the correct year
-2. Rename and edit the `aoc_20YY.h` with the correct year
-3. Rename and edit the day directories and source files
+1. Create a new directory with the correct year
+2. Copy all contents from the `template` directory into the new directory
+3. Edit the project name in `CMakeLists.txt` 
+4. Rename and edit the file `aoc_20YY.h` with the correct year, and edit the define `AOC_YEAR`
+5. Rename the day directories and source files, and edit the source file define `AOC_DAY`
 
 That's all — CMake will detect and build everything automatically.
 
