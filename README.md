@@ -1,103 +1,123 @@
-# advent-of-code
+# Advent of Code
 
-My solutions for the [Advent of Code](http://adventofcode.com/) annual challenge.
+This repository contains my solutions to the annual **[Advent of Code](https://adventofcode.com/)** challenge, implemented in **C** and built using **CMake**.  
 
-## Prerequisites
+---
 
-- CMake >= 3.20
-- C compiler (gcc, clang, MinGW, GCC from MSYS2/UCRT64...)
+## Repository Structure
+
+```
+.
+├── 2024/
+│   ├── CMakeLists.txt        <-- Year-level CMake build entry
+│   ├── aoc_2024.h            <-- Shared header for the year
+│   ├── day01/
+│   │    ├── day01.c
+│   │    ├── tests/           <-- Input files for this day
+│   │    └── CMakeLists.txt
+│   ├── day02/
+│   │    └── ...
+│   └── ...
+├── ...
+└── README.md
+```
+
+Each `day<XX>` directory:
+
+- builds one executable inside the same folder
+- contains a `tests/` directory with input files
+
+---
+
+## Requirements
+
+- **CMake ≥ 3.16**
+- **GCC / Clang / MSVC supporting C99**
+- Optional (Windows MSYS2):
+  - `mingw32-make` for command-line builds
 
 ---
 
 ## Build
 
-### Configure the project
+### 1. Navigate to a specific year
 
-From the root of the repository:
+```bash
+cd <YEAR_DIR>
+```
+
+Each year is an independent CMake project.
+
+### 2. Configure the build
 
 ```bash
 cmake -S . -B build
 ```
 
-### Build all days solutions
+This generates build files inside the `build/` folder.
+
+### 3. Build all days of the year
 
 ```bash
 cmake --build build
 ```
 
-### Build a single day solution
+This compiles all `day<XX>` executables.
+
+---
+
+## Execution
+
+### Option A — Run from the day directory (normal)
+
+Because each solution expects to find its `tests/` folder, it must be executed **from its own directory**:
 
 ```bash
-cmake --build build --target day<XX>
+cd <YEAR_DIR>/day<XX>
+./day<XX>
+```
+
+### Option B — Run from the year directory using CMake targets
+
+The year-level CMakeLists generates convenience targets:
+
+```bash
+cmake --build build --target run_day<XX>
 ```
 
 ---
 
-## Running a solution
+## Enabling Test Mode
 
-Each executable expects to run **inside its own folder** to access its `tests/` directory for input files.  
-So you need to move to the folder containing the executable before running it.
-
-### Example: Running Day 01
-
-```bash
-# Move to the folder of the executable
-cd 2024/day01
-
-# Run the executable
-./day01    # on Linux/MSYS2
-day01.exe  # on Windows
-```
-
----
-
-## Test Mode
-
-To enable the TEST mode (for using test input file):
+Some solutions may support a `TEST` build mode.  
+Enable it during configuration:
 
 ```bash
 cmake -S . -B build -DTEST=ON
 ```
 
----
-
-## Cleaning
-
-### Standard clean
+Then rebuild:
 
 ```bash
-cmake --build build --target clean
-```
-
-### Full clean / reset
-
-```bash
-rm -rf build
+cmake --build build
 ```
 
 ---
 
-## Project Structure
+## Cleaning the Build
 
-```
-2024/
-├── aoc_2024.h
-├── day01/
-│   ├── day01.c
-│   ├── tests/
-│   └── CMakeLists.txt
-├── day02/
-│   ├── day02.c
-│   ├── tests/
-│   └── CMakeLists.txt
-└── ...
-```
+Since CMake does not provide a project-wide `clean` rule, simply delete the build directory `build`.
+---
 
-Each `dayXX` folder contains :
+## Adding a New Year
 
-- Source file `dayXX.c`
-- A `tests/` folder with input files
-- A `CMakeLists.txt` defining the build and run targets
+To add another year:
+
+1. Copy the directory `template/20YY` at the root and rename it with the correct year
+2. Rename and edit the `aoc_20YY.h` with the correct year
+3. Rename and edit the day directories and source files
+
+That's all — CMake will detect and build everything automatically.
 
 ---
 
