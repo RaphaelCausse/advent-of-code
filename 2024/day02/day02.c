@@ -26,7 +26,7 @@ size_t report_lengths[MAX_REPORTS] = {0};
 
 /***** Functions *************************************************************/
 
-aoc_status_t read_input(void)
+t_aoc_status read_input(void)
 {
     FILE *input_file;
     size_t num_levels = 0;
@@ -94,8 +94,10 @@ bool is_report_safe(int32_t levels[], size_t num_levels)
     return (num_pos == 0 || num_neg == 0);
 }
 
-aoc_status_t solve_part_one(void)
+t_aoc_status solve_part_one(void)
 {
+    aoc_solve_start(AOC_DAY, AOC_PART_2);
+
     uint32_t count_safe_reports = 0;
 
     for (size_t r = 0; r < num_reports; r++)
@@ -106,13 +108,14 @@ aoc_status_t solve_part_one(void)
         }
     }
 
-    printf("output: %u\n", count_safe_reports);
-
+    aoc_solve_end(count_safe_reports);
     return AOC_SUCCESS;
 }
 
-aoc_status_t solve_part_two(void)
+t_aoc_status solve_part_two(void)
 {
+    aoc_solve_start(AOC_DAY, AOC_PART_2);
+
     uint32_t count_safe_reports = 0;
     bool safe_with_dampener = false;
 
@@ -153,8 +156,7 @@ aoc_status_t solve_part_two(void)
         }
     }
 
-    printf("output: %u\n", count_safe_reports);
-
+    aoc_solve_end(count_safe_reports);
     return AOC_SUCCESS;
 }
 
@@ -162,30 +164,25 @@ aoc_status_t solve_part_two(void)
 
 int main(void)
 {
-    aoc_timer_t timer;
+    t_aoc_status status;
 
-    if (read_input() == AOC_ERROR)
+    status = read_input();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
 
-    aoc_banner_start(AOC_DAY, AOC_PART_1);
-    aoc_timer_start(&timer);
-    if (solve_part_one() == AOC_ERROR)
+    status = solve_part_one();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
-    aoc_timer_end(&timer);
-    aoc_banner_end();
 
-    aoc_banner_start(AOC_DAY, AOC_PART_2);
-    aoc_timer_start(&timer);
-    if (solve_part_two() == AOC_ERROR)
+    status = solve_part_two();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
-    aoc_timer_end(&timer);
-    aoc_banner_end();
 
     return EXIT_SUCCESS;
 }

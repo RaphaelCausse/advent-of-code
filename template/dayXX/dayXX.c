@@ -1,6 +1,6 @@
 /******************************************************************************
  * @file dayXX.c
- * @brief Solutions for the day XX challenges of Advent of Code 2024.
+ * @brief Solutions for day XX of Advent of Code 2024.
  * @author Raphael CAUSSE
  *****************************************************************************/
 
@@ -16,7 +16,7 @@
 
 /***** Functions *************************************************************/
 
-aoc_status_t read_input(void)
+t_aoc_status read_input(void)
 {
     FILE *input_file;
 
@@ -27,7 +27,7 @@ aoc_status_t read_input(void)
         return AOC_ERROR;
     }
 
-    LOG_WARN_NOT_IMPLEMENTED();
+    LOG_WARNING_NOT_IMPLEMENTED();
 
     if (fclose(input_file) != 0)
     {
@@ -38,16 +38,16 @@ aoc_status_t read_input(void)
     return AOC_SUCCESS;
 }
 
-aoc_status_t solve_part_one(void)
+t_aoc_status solve_part_one(void)
 {
-    LOG_WARN_NOT_IMPLEMENTED();
+    LOG_WARNING_NOT_IMPLEMENTED();
 
     return AOC_SUCCESS;
 }
 
-aoc_status_t solve_part_two(void)
+t_aoc_status solve_part_two(void)
 {
-    LOG_WARN_NOT_IMPLEMENTED();
+    LOG_WARNING_NOT_IMPLEMENTED();
 
     return AOC_SUCCESS;
 }
@@ -56,14 +56,14 @@ aoc_status_t solve_part_two(void)
 
 int main(void)
 {
-    aoc_timer_t timer;
+    t_aoc_timer timer;
 
     if (read_input() == AOC_ERROR)
     {
         return EXIT_FAILURE;
     }
 
-    aoc_banner_start(AOC_DAY, AOC_PART_1);
+    aoc_solve_start(AOC_DAY, AOC_PART_1);
     aoc_timer_start(&timer);
     if (solve_part_one() == AOC_ERROR)
     {
@@ -72,7 +72,7 @@ int main(void)
     aoc_timer_end(&timer);
     aoc_banner_end();
 
-    aoc_banner_start(AOC_DAY, AOC_PART_2);
+    aoc_solve_start(AOC_DAY, AOC_PART_2);
     aoc_timer_start(&timer);
     if (solve_part_two() == AOC_ERROR)
     {

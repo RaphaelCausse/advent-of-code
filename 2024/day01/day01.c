@@ -1,6 +1,6 @@
 /******************************************************************************
  * @file day01.c
- * @brief Solutions for the day 1 challenges of Advent of Code 2024.
+ * @brief Solutions for day 1 of Advent of Code 2024.
  * @author Raphael CAUSSE
  *****************************************************************************/
 
@@ -22,7 +22,7 @@ int32_t right[ARRAY_MAX] = {0};
 
 /***** Functions *************************************************************/
 
-aoc_status_t read_input(void)
+t_aoc_status read_input(void)
 {
     FILE *input_file;
 
@@ -54,8 +54,10 @@ int compare(const void *first, const void *second)
     return first_value - second_value;
 }
 
-aoc_status_t solve_part_one(void)
+t_aoc_status solve_part_one(void)
 {
+    aoc_solve_start(AOC_DAY, AOC_PART_1);
+
     uint32_t sum = 0;
 
     /* Ascending order sort */
@@ -67,13 +69,14 @@ aoc_status_t solve_part_one(void)
         sum += abs(left[i] - right[i]);
     }
 
-    printf("output: %u\n", sum);
-
+    aoc_solve_end(sum);
     return AOC_SUCCESS;
 }
 
-aoc_status_t solve_part_two(void)
+t_aoc_status solve_part_two(void)
 {
+    aoc_solve_start(AOC_DAY, AOC_PART_2);
+
     uint32_t similarity = 0;
     uint32_t count = 0;
     size_t last_index = 0;
@@ -103,8 +106,7 @@ aoc_status_t solve_part_two(void)
         }
     }
 
-    printf("output: %u\n", similarity);
-
+    aoc_solve_end(similarity);
     return AOC_SUCCESS;
 }
 
@@ -112,30 +114,25 @@ aoc_status_t solve_part_two(void)
 
 int main(void)
 {
-    aoc_timer_t timer;
+    t_aoc_status status;
 
-    if (read_input() == AOC_ERROR)
+    status = read_input();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
 
-    aoc_banner_start(AOC_DAY, AOC_PART_1);
-    aoc_timer_start(&timer);
-    if (solve_part_one() == AOC_ERROR)
+    status = solve_part_one();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
-    aoc_timer_end(&timer);
-    aoc_banner_end();
 
-    aoc_banner_start(AOC_DAY, AOC_PART_2);
-    aoc_timer_start(&timer);
-    if (solve_part_two() == AOC_ERROR)
+    status = solve_part_two();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
-    aoc_timer_end(&timer);
-    aoc_banner_end();
 
     return EXIT_SUCCESS;
 }
