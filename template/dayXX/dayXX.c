@@ -1,12 +1,12 @@
 /******************************************************************************
  * @file dayXX.c
- * @brief Solutions for day XX of Advent of Code 2024.
+ * @brief Solutions for day XX of Advent of Code 20YY.
  * @author Raphael CAUSSE
  *****************************************************************************/
 
 /***** Includes **************************************************************/
 
-#include "aoc_20YY.h"
+#include "aoc.h"
 
 /***** Definitions ***********************************************************/
 
@@ -56,30 +56,25 @@ t_aoc_status solve_part_two(void)
 
 int main(void)
 {
-    t_aoc_timer timer;
+    t_aoc_status status;
 
-    if (read_input() == AOC_ERROR)
+    status = read_input();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
 
-    aoc_solve_start(AOC_DAY, AOC_PART_1);
-    aoc_timer_start(&timer);
-    if (solve_part_one() == AOC_ERROR)
+    status = solve_part_one();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
-    aoc_timer_end(&timer);
-    aoc_banner_end();
 
-    aoc_solve_start(AOC_DAY, AOC_PART_2);
-    aoc_timer_start(&timer);
-    if (solve_part_two() == AOC_ERROR)
+    status = solve_part_two();
+    if (AOC_ERROR == status)
     {
         return EXIT_FAILURE;
     }
-    aoc_timer_end(&timer);
-    aoc_banner_end();
 
     return EXIT_SUCCESS;
 }

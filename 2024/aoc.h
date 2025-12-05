@@ -1,11 +1,11 @@
 /******************************************************************************
- * @file aoc_2024.h
- * @brief Header for Advent of Code Year 2024.
+ * @file aoc.h
+ * @brief Header for Advent of Code.
  * @author Raphael CAUSSE
  *****************************************************************************/
 
-#ifndef _AOC_2024_H_
-#define _AOC_2024_H_
+#ifndef __AOC_H__
+#define __AOC_H__
 
 /***** Includes **************************************************************/
 
@@ -81,4 +81,4 @@ static void aoc_solve_end(uint32_t result)
 extern t_aoc_status solve_part_one(void);
 extern t_aoc_status solve_part_two(void);
 
-#endif /* _AOC_2024_H_ */
+#endif /* __AOC_H__ */

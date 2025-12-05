@@ -1,12 +1,12 @@
 /******************************************************************************
  * @file day02.c
- * @brief Solutions for the day 2 challenges of Advent of Code 2024.
+ * @brief Solutions for day 2 of Advent of Code 2024.
  * @author Raphael CAUSSE
  *****************************************************************************/
 
 /***** Includes **************************************************************/
 
-#include "aoc_2024.h"
+#include "aoc.h"
 
 /***** Definitions ***********************************************************/
 
