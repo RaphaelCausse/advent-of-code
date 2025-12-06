@@ -10,9 +10,25 @@
 
 /***** Definitions ***********************************************************/
 
-#define AOC_DAY 1
+#define AOC_DAY (1)
+
+#define DIAL_MIN (0)
+#define DIAL_MAX (99)
+#define DIAL_START (50)
+
+#define MAX_INSTRUCTIONS (8192)
+
+/***** Types *****************************************************************/
+
+typedef struct
+{
+    char direction;
+    uint32_t distance;
+} t_rotation;
 
 /***** Globals ***************************************************************/
+
+t_rotation instructions[MAX_INSTRUCTIONS] = {0};
 
 /***** Functions *************************************************************/
 
@@ -27,7 +43,12 @@ t_aoc_status read_input(void)
         return AOC_ERROR;
     }
 
-    LOG_WARNING_NOT_IMPLEMENTED();
+    size_t idx = 0;
+    while (fscanf(input_file, "%c%u\n", &instructions[idx].direction, &instructions[idx].distance) != EOF)
+    {
+        fprintf(stdout, "%c%u\n", instructions[idx].direction, instructions[idx].distance);
+        idx++;
+    }
 
     if (fclose(input_file) != 0)
     {
@@ -40,8 +61,13 @@ t_aoc_status read_input(void)
 
 t_aoc_status solve_part_one(void)
 {
+    aoc_solve_start(AOC_DAY, AOC_PART_1);
+
+    uint32_t password = 0;
+
     LOG_WARNING_NOT_IMPLEMENTED();
 
+    aoc_solve_end(password);
     return AOC_SUCCESS;
 }
 

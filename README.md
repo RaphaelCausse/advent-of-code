@@ -1,6 +1,6 @@
 # Advent of Code
 
-This repository contains my solutions to the annual **[Advent of Code](https://adventofcode.com/)** challenge, implemented in **C** and built using **CMake**.  
+This repository contains my solutions to the annual **[Advent of Code](https://adventofcode.com/)** challenge, implemented in **C**.
 
 ---
 
@@ -9,106 +9,81 @@ This repository contains my solutions to the annual **[Advent of Code](https://a
 ```
 .
 ├── 2024/
-│   ├── CMakeLists.txt        <-- Year-level CMake build entry
-│   ├── aoc_2024.h            <-- Shared header for the year
+│   ├── aoc.h
 │   ├── day01/
-│   │    ├── day01.c
-│   │    ├── tests/           <-- Input files for this day
-│   │    └── CMakeLists.txt
+│   │   ├── day01.c
+│   │   ├── Makefile
+│   │   └── tests/
+│   │        ├── test.txt
+│   │        └── input.txt
 │   ├── day02/
-│   │    └── ...
+│   │   └── ...
 │   └── ...
 ├── ...
+├── template/
+│   ├── aoc.h
+│   └── day01/
+│       ├── day01.c
+│       ├── Makefile
+│       └── tests/
+│            ├── test.txt
+│            └── input.txt
 └── README.md
 ```
 
-Each `day<XX>` directory:
-
-- builds one executable inside the same folder
-- contains a `tests/` directory with input files
-  - `test.txt` for the test inputs with known answer from the challenge
-  - `input.txt` for the given inputs
+- Each year folder contains several `day<XX>` directories.
+- Each day directory builds a single executable in the same folder.
+- Each day has its own `tests/` directory containing:
+  - `test.txt` (example input from the AoC website)
+  - `input.txt` (your personal puzzle input)
 
 ---
 
 ## Requirements
 
-- **CMake ≥ 3.16**
 - **GCC / Clang / MSVC supporting C99**
-- Optional (Windows MSYS2):
-  - `mingw32-make` for command-line builds
+- **Make**
 
 ---
 
 ## Build
 
-### 1. Navigate to a specific year
+Each day solutions is an independent program with its own Makefile.
 
+Move to the corresponding day directory :
 ```bash
-cd <YEAR>
+cd <YEAR>/day<XX>
 ```
 
-Each year is an independent CMake project.
-
-### 2. Configure the build
-
+Build the solution :
 ```bash
-cmake -S . -B build
+make
 ```
 
-This generates build files inside the `build/` folder.
+The executable will automatically load its input from the local `tests/` directory.
 
-### 3. Build all days of the year
-
+You can build the solution to use the test input :
 ```bash
-cmake --build build
+make test
 ```
-
-This compiles all `day<XX>` executables.
 
 ---
 
 ## Execution
 
-### Option A — Run from the day directory (normal)
-
-Because each solution expects to find its `tests/` folder, it must be executed **from its own directory**:
-
+Run the executable :
 ```bash
-cd <YEAR>/day<XX>
-./day<XX>
-```
-
-### Option B — Run from the year directory using CMake targets
-
-The year-level CMakeLists generates convenience targets:
-
-```bash
-cmake --build build --target run_day<XX>
+make run
 ```
 
 ---
 
-## Enabling Test Mode
+## Cleaning
 
-Some solutions may support a `TEST` build mode.  
-Enable it during configuration:
-
+Clean generated files (executable, dependency) :
 ```bash
-cmake -S . -B build -DTEST=ON
+make clean
 ```
-
-Then rebuild:
-
-```bash
-cmake --build build
-```
-
----
-
-## Cleaning the Build
-
-Since CMake does not provide a project-wide `clean` rule, simply delete the build directory `build`.
 
 ---
 
@@ -118,12 +93,9 @@ To add another year:
 
 1. Create a new directory with the correct year
 2. Copy all contents from the `template` directory into the new directory
-3. Edit the project name in `CMakeLists.txt` 
-4. Edit the define `AOC_YEAR` in the header file `aoc.h`
-5. Rename the day directory and source file.
-6. Edit the define `AOC_DAY` in the source file.
-
-That's all — CMake will detect and build everything automatically.
+3. Edit the define `AOC_YEAR` in the header file `aoc.h`
+4. Rename the day directory and source file.
+5. Edit the define `AOC_DAY` in the source file.
 
 ---
 
