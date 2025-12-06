@@ -18,10 +18,11 @@
 
 t_aoc_status read_input(void)
 {
-    FILE *input_file;
+    FILE *input_file = NULL;
 
+    printf("Input file : '%s'\n", INPUT_FILE);
     input_file = fopen(INPUT_FILE, "r");
-    if (input_file == NULL)
+    if (NULL == input_file)
     {
         LOG_ERROR_FILE();
         return AOC_ERROR;

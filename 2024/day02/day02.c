@@ -28,11 +28,12 @@ size_t report_lengths[MAX_REPORTS] = {0};
 
 t_aoc_status read_input(void)
 {
-    FILE *input_file;
+    FILE *input_file = NULL;
     size_t num_levels = 0;
 
+    printf("Input file : '%s'\n", INPUT_FILE);
     input_file = fopen(INPUT_FILE, "r");
-    if (input_file == NULL)
+    if (NULL == input_file)
     {
         LOG_ERROR_FILE();
         return AOC_ERROR;
@@ -44,7 +45,7 @@ t_aoc_status read_input(void)
         while (fscanf(input_file, "%d", &reports[num_reports][num_levels]) == 1)
         {
             num_levels++;
-            if (getc(input_file) == '\n')
+            if ('\n' == getc(input_file))
             {
                 break;
             }
