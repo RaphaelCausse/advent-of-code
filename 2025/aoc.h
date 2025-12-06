@@ -35,6 +35,9 @@
 #define LOG_ERROR_FILE() \
     (printf("[ERROR] %s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
 
+#define LOG_ERROR_MAX_REACHED(msg, max, cur) \
+    (printf("[ERROR] %s: %s (%d): %llu\n", __func__, msg, max, cur))
+
 #define LOG_WARNING_NOT_IMPLEMENTED() \
     (printf("[WARNING] %s: not implemented\n", __func__))
 
