@@ -22,8 +22,8 @@ This repository contains my solutions to the annual **[Advent of Code](https://a
 ├── ...
 ├── template/
 │   ├── aoc.h
-│   └── day01/
-│       ├── day01.c
+│   └── dayXX/
+│       ├── dayXX.c
 │       ├── Makefile
 │       └── tests/
 │            ├── test.txt
