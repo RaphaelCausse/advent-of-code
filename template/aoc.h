@@ -67,7 +67,7 @@ static void aoc_solve_start(int day, int part)
 
 static void aoc_solve_end(uint32_t result)
 {
-    _global_timer.start_time = clock();
+    _global_timer.end_time = clock();
 
     double elapsed = (double)(_global_timer.end_time - _global_timer.start_time) / CLOCKS_PER_SEC;
 
