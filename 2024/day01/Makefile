@@ -32,7 +32,7 @@ DEPFLAGS := -MMD -MP
 # ===========================
 #  Default build
 # ===========================
-all: clean $(TARGET)
+all: $(TARGET)
 
 $(TARGET): $(SOURCES)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) $^ -o $@
