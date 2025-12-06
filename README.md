@@ -26,6 +26,8 @@ Each `day<XX>` directory:
 
 - builds one executable inside the same folder
 - contains a `tests/` directory with input files
+  - `test.txt` for the test inputs with known answer from the challenge
+  - `input.txt` for the given inputs
 
 ---
 
