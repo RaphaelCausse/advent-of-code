@@ -14,10 +14,10 @@
 #define AOC_DAY (1)
 
 #define DIAL_MIN (0)
-#define DIAL_MAX (99)
+#define DIAL_MAX (100)
 #define DIAL_START (50)
 
-#define MAX_INSTRUCTIONS (8192)
+#define MAX_ROTATIONS (8192)
 
 /***** Types *****************************************************************/
 
@@ -29,9 +29,8 @@ typedef struct
 
 /***** Globals ***************************************************************/
 
-size_t length = 0;
-t_rotation instructions[MAX_INSTRUCTIONS] = {0};
-uint32_t dial_pos = DIAL_START;
+size_t num_rotations = 0;
+t_rotation rotations[MAX_ROTATIONS] = {0};
 
 /***** Functions *************************************************************/
 
@@ -48,17 +47,17 @@ t_aoc_status read_input(void)
         return AOC_ERROR;
     }
 
-    while (fscanf(input_file, "%c%u\n", &instructions[index].direction, &instructions[index].distance) != EOF)
+    while (fscanf(input_file, "%c%u\n", &rotations[index].direction, &rotations[index].distance) != EOF)
     {
         index++;
     }
-    if (index >= MAX_INSTRUCTIONS)
+    if (index >= MAX_ROTATIONS)
     {
-        LOG_ERROR_MAX_REACHED("Max instructions reached", MAX_INSTRUCTIONS, index);
+        LOG_ERROR_MAX_REACHED("Max instructions reached", MAX_ROTATIONS, index);
         fclose(input_file);
         return AOC_ERROR;
     }
-    length = index;
+    num_rotations = index;
 
     if (fclose(input_file) != 0)
     {
@@ -68,36 +67,16 @@ t_aoc_status read_input(void)
     return AOC_SUCCESS;
 }
 
-uint32_t rotate_dial(t_rotation rotation)
+uint32_t rotate_one_click(uint32_t dial_pos, char direction)
 {
-    // printf("dial %u -> %c%u ", dial_pos, rotation.direction, rotation.distance);
-    switch (rotation.direction)
+    if (direction == 'L')
     {
-    case 'L':
-        if (rotation.distance > dial_pos)
-        {
-            dial_pos = (DIAL_MAX + 1) - ((rotation.distance - dial_pos) % (DIAL_MAX + 1));
-        }
-        else
-        {
-            dial_pos -= rotation.distance;
-        }
-        break;
-
-    case 'R':
-        dial_pos = (dial_pos + rotation.distance) % (DIAL_MAX + 1);
-        break;
-
-    default:
-        break;
+        dial_pos = (dial_pos + (DIAL_MAX - 1)) % DIAL_MAX;
     }
-    /* Not allowing 100 as it actually means 0 */
-    if ((DIAL_MAX + 1) == dial_pos)
+    else
     {
-        dial_pos = DIAL_MIN;
+        dial_pos = (dial_pos + 1) % DIAL_MAX;
     }
-
-    // printf("-> dial %u\n", dial_pos);
     return dial_pos;
 }
 
@@ -105,13 +84,17 @@ t_aoc_status solve_part_one(void)
 {
     aoc_solve_start(AOC_DAY, AOC_PART_1);
 
+    uint32_t dial_pos = DIAL_START;
     uint32_t password = 0;
 
-    /* Counting number of time dial stops at 0 */
-    for (size_t i = 0; i < length; i++)
+    /* Counting number of time dial stops at 0 at the end of a rotation */
+    for (size_t i = 0; i < num_rotations; i++)
     {
-        dial_pos = rotate_dial(instructions[i]);
-        if (0 == dial_pos)
+        for (uint32_t k = 0; k < rotations[i].distance; k++)
+        {
+            dial_pos = rotate_one_click(dial_pos, rotations[i].direction);
+        }
+        if (DIAL_MIN == dial_pos)
         {
             password++;
         }
@@ -123,8 +106,25 @@ t_aoc_status solve_part_one(void)
 
 t_aoc_status solve_part_two(void)
 {
-    LOG_WARNING_NOT_IMPLEMENTED();
+    aoc_solve_start(AOC_DAY, AOC_PART_2);
 
+    uint32_t dial_pos = DIAL_START;
+    uint32_t password = 0;
+
+    /* Counting number of time dial points at 0, during a rotation or at the end of one */
+    for (size_t i = 0; i < num_rotations; i++)
+    {
+        for (uint32_t k = 0; k < rotations[i].distance; k++)
+        {
+            dial_pos = rotate_one_click(dial_pos, rotations[i].direction);
+            if (DIAL_MIN == dial_pos)
+            {
+                password++;
+            }
+        }
+    }
+
+    aoc_solve_end(password);
     return AOC_SUCCESS;
 }
 
