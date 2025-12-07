@@ -39,7 +39,7 @@ t_aoc_status read_input(void)
     FILE *input_file = NULL;
     size_t index = 0;
 
-    printf("Input file : '%s'\n", INPUT_FILE);
+    LOG_INPUT_FILE();
     input_file = fopen(INPUT_FILE, "r");
     if (NULL == input_file)
     {

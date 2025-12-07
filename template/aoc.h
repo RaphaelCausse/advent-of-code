@@ -32,6 +32,9 @@
 
 /***** Macros ****************************************************************/
 
+#define LOG_INPUT_FILE() \
+    (printf("Input file : '%s'\n", INPUT_FILE))
+
 #define LOG_ERROR_FILE() \
     (printf("[ERROR] %s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
 

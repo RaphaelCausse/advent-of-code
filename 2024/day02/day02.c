@@ -10,13 +10,13 @@
 
 /***** Definitions ***********************************************************/
 
-#define AOC_DAY 2
+#define AOC_DAY (2)
 
-#define MAX_REPORTS 1024
-#define MAX_LEVELS 16
+#define MAX_REPORTS (1024)
+#define MAX_LEVELS (16)
 
-#define DIFF_MIN 1
-#define DIFF_MAX 3
+#define DIFF_MIN (1)
+#define DIFF_MAX (3)
 
 /***** Globals ***************************************************************/
 
@@ -31,7 +31,7 @@ t_aoc_status read_input(void)
     FILE *input_file = NULL;
     size_t num_levels = 0;
 
-    printf("Input file : '%s'\n", INPUT_FILE);
+    LOG_INPUT_FILE();
     input_file = fopen(INPUT_FILE, "r");
     if (NULL == input_file)
     {

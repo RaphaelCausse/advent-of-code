@@ -10,7 +10,7 @@
 
 /***** Definitions ***********************************************************/
 
-#define AOC_DAY 3
+#define AOC_DAY (3)
 
 /***** Globals ***************************************************************/
 
@@ -20,7 +20,7 @@ t_aoc_status read_input(void)
 {
     FILE *input_file = NULL;
 
-    printf("Input file : '%s'\n", INPUT_FILE);
+    LOG_INPUT_FILE();
     input_file = fopen(INPUT_FILE, "r");
     if (NULL == input_file)
     {
