@@ -22,17 +22,20 @@ INCLUDES := -I..
 
 # Compiler
 CC := gcc
-CFLAGS := -std=c99 -O2 -Wall -Wextra -Wpedantic
+CFLAGS := -std=c99 -O2 -pedantic -Wall -Wextra
 CPPFLAGS := $(INCLUDES)
 DEPFLAGS := -MMD -MP
 
 # Phony rules
-.PHONY: all clean test run
+.PHONY: all build test run clean
+
+# All rules
+all: clean build run
 
 # ===========================
-#  Default build
+#  Build
 # ===========================
-all:$(TARGET)
+build: $(TARGET)
 
 $(TARGET): $(SOURCES)
 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) $^ -o $@
@@ -41,7 +44,7 @@ $(TARGET): $(SOURCES)
 #  Test mode
 # ===========================
 test: CPPFLAGS += -DTEST
-test: clean $(TARGET)
+test: $(TARGET)
 
 # ===========================
 #  Run executable

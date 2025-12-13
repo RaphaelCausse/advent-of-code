@@ -13,7 +13,7 @@ This repository contains my solutions to the annual **[Advent of Code](https://a
 │   ├── day01/
 │   │   ├── day01.c
 │   │   ├── Makefile
-│   │   └── tests/
+│   │   └── data/
 │   │        ├── test.txt
 │   │        └── input.txt
 │   ├── day02/
@@ -25,7 +25,7 @@ This repository contains my solutions to the annual **[Advent of Code](https://a
 │   └── dayXX/
 │       ├── dayXX.c
 │       ├── Makefile
-│       └── tests/
+│       └── data/
 │            ├── test.txt
 │            └── input.txt
 └── README.md
@@ -33,7 +33,7 @@ This repository contains my solutions to the annual **[Advent of Code](https://a
 
 - Each year folder contains several `day<XX>` directories.
 - Each day directory builds a single executable in the same folder.
-- Each day has its own `tests/` directory containing:
+- Each day has its own `data/` directory containing:
   - `test.txt` (example input from the AoC website)
   - `input.txt` (your personal puzzle input)
 
@@ -52,15 +52,15 @@ Each day solutions is an independent program with its own Makefile.
 
 Move to the corresponding day directory :
 ```bash
-cd <YEAR>/day<XX>
+cd <YEAR>/day<DAY_NUMBER>
 ```
 
 Build the solution :
 ```bash
-make
+make build
 ```
 
-The executable will automatically load its input from the local `tests/` directory.
+The executable will automatically load its input from the local `data/` directory.
 
 You can build the solution to use the test input :
 ```bash

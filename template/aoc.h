@@ -25,9 +25,9 @@
 #define AOC_PART_2 (2)
 
 #ifdef TEST
-#define INPUT_FILE "tests/test.txt"
+#define INPUT_FILE "data/test.txt"
 #else
-#define INPUT_FILE "tests/input.txt"
+#define INPUT_FILE "data/input.txt"
 #endif
 
 /***** Macros ****************************************************************/

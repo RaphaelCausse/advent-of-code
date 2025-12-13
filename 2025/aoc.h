@@ -25,15 +25,18 @@
 #define AOC_PART_2 (2)
 
 #ifdef TEST
-#define INPUT_FILE "tests/test.txt"
+#define INPUT_FILE "data/test.txt"
 #else
-#define INPUT_FILE "tests/input.txt"
+#define INPUT_FILE "data/input.txt"
 #endif
 
 /***** Macros ****************************************************************/
 
 #define LOG_INPUT_FILE() \
     (printf("Input file : '%s'\n", INPUT_FILE))
+
+#define LOG_ERROR(msg) \
+    (prinft("[ERROR] %s: %s\n", __func__, msg))
 
 #define LOG_ERROR_FILE() \
     (printf("[ERROR] %s: %s: (%d) %s\n", __func__, INPUT_FILE, errno, strerror(errno)))
