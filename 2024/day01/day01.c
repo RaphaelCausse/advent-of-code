@@ -22,11 +22,10 @@ int32_t right[ARRAY_MAX] = {0};
 
 /***** Functions *************************************************************/
 
-t_aoc_status read_input(void)
+t_aoc_status aoc_read_input(void)
 {
     FILE *input_file = NULL;
 
-    LOG_INPUT_FILE();
     input_file = fopen(INPUT_FILE, "r");
     if (NULL == input_file)
     {
@@ -39,12 +38,7 @@ t_aoc_status read_input(void)
         length++;
     }
 
-    if (fclose(input_file) != 0)
-    {
-        LOG_ERROR_FILE();
-        return AOC_ERROR;
-    }
-
+    fclose(input_file);
     return AOC_SUCCESS;
 }
 
@@ -55,10 +49,8 @@ int compare(const void *first, const void *second)
     return first_value - second_value;
 }
 
-t_aoc_status solve_part_one(void)
+t_aoc_result aoc_solve_part_one(void)
 {
-    aoc_solve_start(AOC_DAY, AOC_PART_1);
-
     uint32_t sum = 0;
 
     /* Ascending order sort */
@@ -70,14 +62,11 @@ t_aoc_status solve_part_one(void)
         sum += abs(left[i] - right[i]);
     }
 
-    aoc_solve_end(sum);
-    return AOC_SUCCESS;
+    return aoc_result_u32(sum, 11); /* Example solution is 11 */
 }
 
-t_aoc_status solve_part_two(void)
+t_aoc_result aoc_solve_part_two(void)
 {
-    aoc_solve_start(AOC_DAY, AOC_PART_2);
-
     uint32_t similarity = 0;
     uint32_t count = 0;
     size_t last_index = 0;
@@ -107,33 +96,12 @@ t_aoc_status solve_part_two(void)
         }
     }
 
-    aoc_solve_end(similarity);
-    return AOC_SUCCESS;
+    return aoc_result_u32(similarity, 31); /* Example solution is 31 */
 }
 
 /***** Main ******************************************************************/
 
 int main(void)
 {
-    t_aoc_status status;
-
-    status = read_input();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_one();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_two();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    return EXIT_SUCCESS;
+    return aoc_run(AOC_DAY);
 }

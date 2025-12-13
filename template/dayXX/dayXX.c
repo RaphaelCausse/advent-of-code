@@ -12,70 +12,40 @@
 
 #define AOC_DAY (0)
 
+/***** Types *****************************************************************/
+
 /***** Globals ***************************************************************/
 
 /***** Functions *************************************************************/
 
-t_aoc_status read_input(void)
+t_aoc_status aoc_read_input(void)
 {
-    FILE *input_file;
+    FILE *input_file = NULL;
 
-    LOG_INPUT_FILE();
     input_file = fopen(INPUT_FILE, "r");
-    if (input_file == NULL)
+    if (NULL == input_file)
     {
         LOG_ERROR_FILE();
         return AOC_ERROR;
     }
 
-    LOG_WARNING_NOT_IMPLEMENTED();
-
-    if (fclose(input_file) != 0)
-    {
-        LOG_ERROR_FILE();
-        return AOC_ERROR;
-    }
-
-    return AOC_SUCCESS;
+    fclose(input_file);
+    return AOC_NOTIMPL; /* Not implemented */
 }
 
-t_aoc_status solve_part_one(void)
+t_aoc_result aoc_solve_part_one(void)
 {
-    LOG_WARNING_NOT_IMPLEMENTED();
-
-    return AOC_SUCCESS;
+    return aoc_result_notimpl();
 }
 
-t_aoc_status solve_part_two(void)
+t_aoc_result aoc_solve_part_two(void)
 {
-    LOG_WARNING_NOT_IMPLEMENTED();
-
-    return AOC_SUCCESS;
+    return aoc_result_notimpl();
 }
 
 /***** Main ******************************************************************/
 
 int main(void)
 {
-    t_aoc_status status;
-
-    status = read_input();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_one();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_two();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    return EXIT_SUCCESS;
+    return aoc_run(AOC_DAY);
 }

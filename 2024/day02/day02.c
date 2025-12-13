@@ -26,12 +26,11 @@ size_t report_lengths[MAX_REPORTS] = {0};
 
 /***** Functions *************************************************************/
 
-t_aoc_status read_input(void)
+t_aoc_status aoc_read_input(void)
 {
     FILE *input_file = NULL;
     size_t num_levels = 0;
 
-    LOG_INPUT_FILE();
     input_file = fopen(INPUT_FILE, "r");
     if (NULL == input_file)
     {
@@ -58,12 +57,7 @@ t_aoc_status read_input(void)
         }
     }
 
-    if (fclose(input_file) != 0)
-    {
-        LOG_ERROR_FILE();
-        return AOC_ERROR;
-    }
-
+    fclose(input_file);
     return AOC_SUCCESS;
 }
 
@@ -95,10 +89,8 @@ bool is_report_safe(int32_t levels[], size_t num_levels)
     return (num_pos == 0 || num_neg == 0);
 }
 
-t_aoc_status solve_part_one(void)
+t_aoc_result aoc_solve_part_one(void)
 {
-    aoc_solve_start(AOC_DAY, AOC_PART_2);
-
     uint32_t count_safe_reports = 0;
 
     for (size_t r = 0; r < num_reports; r++)
@@ -109,14 +101,11 @@ t_aoc_status solve_part_one(void)
         }
     }
 
-    aoc_solve_end(count_safe_reports);
-    return AOC_SUCCESS;
+    return aoc_result_u32(count_safe_reports, 2); /* Example solution is 2 */
 }
 
-t_aoc_status solve_part_two(void)
+t_aoc_result aoc_solve_part_two(void)
 {
-    aoc_solve_start(AOC_DAY, AOC_PART_2);
-
     uint32_t count_safe_reports = 0;
     bool safe_with_dampener = false;
 
@@ -157,33 +146,12 @@ t_aoc_status solve_part_two(void)
         }
     }
 
-    aoc_solve_end(count_safe_reports);
-    return AOC_SUCCESS;
+    return aoc_result_u32(count_safe_reports, 4); /* Example solution is 4 */
 }
 
 /***** Main ******************************************************************/
 
 int main(void)
 {
-    t_aoc_status status;
-
-    status = read_input();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_one();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_two();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    return EXIT_SUCCESS;
+    return aoc_run(AOC_DAY);
 }

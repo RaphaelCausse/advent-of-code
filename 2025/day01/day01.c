@@ -34,12 +34,11 @@ t_rotation rotations[MAX_ROTATIONS] = {0};
 
 /***** Functions *************************************************************/
 
-t_aoc_status read_input(void)
+t_aoc_status aoc_read_input(void)
 {
     FILE *input_file = NULL;
     size_t index = 0;
 
-    LOG_INPUT_FILE();
     input_file = fopen(INPUT_FILE, "r");
     if (NULL == input_file)
     {
@@ -53,37 +52,36 @@ t_aoc_status read_input(void)
     }
     if (index >= MAX_ROTATIONS)
     {
-        LOG_ERROR_MAX_REACHED("Max instructions reached", MAX_ROTATIONS, index);
+        LOG_ERROR("Max instructions reached");
         fclose(input_file);
         return AOC_ERROR;
     }
     num_rotations = index;
 
-    if (fclose(input_file) != 0)
-    {
-        LOG_ERROR_FILE();
-    }
-
+    fclose(input_file);
     return AOC_SUCCESS;
 }
 
 uint32_t rotate_one_click(uint32_t dial_pos, char direction)
 {
-    if (direction == 'L')
+    switch (direction)
     {
+    case 'L':
         dial_pos = (dial_pos + (DIAL_MAX - 1)) % DIAL_MAX;
-    }
-    else
-    {
+        break;
+
+    case 'R':
         dial_pos = (dial_pos + 1) % DIAL_MAX;
+        break;
+
+    default:
+        break;
     }
     return dial_pos;
 }
 
-t_aoc_status solve_part_one(void)
+t_aoc_result aoc_solve_part_one(void)
 {
-    aoc_solve_start(AOC_DAY, AOC_PART_1);
-
     uint32_t dial_pos = DIAL_START;
     uint32_t password = 0;
 
@@ -100,14 +98,11 @@ t_aoc_status solve_part_one(void)
         }
     }
 
-    aoc_solve_end(password);
-    return AOC_SUCCESS;
+    return aoc_result_u32(password, 3); /* Example solution is 3 */
 }
 
-t_aoc_status solve_part_two(void)
+t_aoc_result aoc_solve_part_two(void)
 {
-    aoc_solve_start(AOC_DAY, AOC_PART_2);
-
     uint32_t dial_pos = DIAL_START;
     uint32_t password = 0;
 
@@ -124,33 +119,12 @@ t_aoc_status solve_part_two(void)
         }
     }
 
-    aoc_solve_end(password);
-    return AOC_SUCCESS;
+    return aoc_result_u32(password, 6); /* Example solution is 6 */
 }
 
 /***** Main ******************************************************************/
 
 int main(void)
 {
-    t_aoc_status status;
-
-    status = read_input();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_one();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    status = solve_part_two();
-    if (AOC_ERROR == status)
-    {
-        return EXIT_FAILURE;
-    }
-
-    return EXIT_SUCCESS;
+    return aoc_run(AOC_DAY);
 }
