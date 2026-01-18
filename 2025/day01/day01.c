@@ -34,7 +34,7 @@ t_rotation rotations[MAX_ROTATIONS] = {0};
 
 /***** Functions *************************************************************/
 
-t_aoc_status aoc_read_input(void)
+t_aoc_result aoc_read_input(void)
 {
     FILE *input_file = NULL;
     size_t index = 0;
@@ -43,7 +43,7 @@ t_aoc_status aoc_read_input(void)
     if (NULL == input_file)
     {
         LOG_ERROR_FILE();
-        return AOC_ERROR;
+        return aoc_result_error();
     }
 
     while (fscanf(input_file, "%c%u\n", &rotations[index].direction, &rotations[index].distance) != EOF)
@@ -54,12 +54,12 @@ t_aoc_status aoc_read_input(void)
     {
         LOG_ERROR("Max instructions reached");
         fclose(input_file);
-        return AOC_ERROR;
+        return aoc_result_error();
     }
     num_rotations = index;
 
     fclose(input_file);
-    return AOC_SUCCESS;
+    return aoc_result_ok();
 }
 
 uint32_t rotate_one_click(uint32_t dial_pos, char direction)

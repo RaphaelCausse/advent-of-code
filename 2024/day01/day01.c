@@ -22,7 +22,7 @@ int32_t right[ARRAY_MAX] = {0};
 
 /***** Functions *************************************************************/
 
-t_aoc_status aoc_read_input(void)
+t_aoc_result aoc_read_input(void)
 {
     FILE *input_file = NULL;
 
@@ -30,7 +30,7 @@ t_aoc_status aoc_read_input(void)
     if (NULL == input_file)
     {
         LOG_ERROR_FILE();
-        return AOC_ERROR;
+        return aoc_result_error();
     }
 
     while (fscanf(input_file, "%d   %d\n", &left[length], &right[length]) != EOF)
@@ -39,7 +39,7 @@ t_aoc_status aoc_read_input(void)
     }
 
     fclose(input_file);
-    return AOC_SUCCESS;
+    return aoc_result_ok();
 }
 
 int compare(const void *first, const void *second)

@@ -51,7 +51,7 @@ typedef struct
 
 typedef enum
 {
-    AOC_SUCCESS, /* Success */
+    AOC_OK,      /* Success */
     AOC_ERROR,   /* Error occured */
     AOC_NOTIMPL, /* Not implemented */
 } t_aoc_status;
@@ -86,7 +86,7 @@ typedef struct
 
 /***** Public Functions Prototypes **************************************************/
 
-extern t_aoc_status aoc_read_input(void);
+extern t_aoc_result aoc_read_input(void);
 extern t_aoc_result aoc_solve_part_one(void);
 extern t_aoc_result aoc_solve_part_two(void);
 
@@ -141,22 +141,22 @@ static inline t_aoc_value aoc_val_f64(double v)
 
 static inline t_aoc_result aoc_result_u32(uint32_t obtained, uint32_t expected)
 {
-    return (t_aoc_result){.status = AOC_SUCCESS, .obtained = aoc_val_u32(obtained), .expected = aoc_val_u32(expected)};
+    return (t_aoc_result){.status = AOC_OK, .obtained = aoc_val_u32(obtained), .expected = aoc_val_u32(expected)};
 }
 
 static inline t_aoc_result aoc_result_u64(uint64_t obtained, uint64_t expected)
 {
-    return (t_aoc_result){.status = AOC_SUCCESS, .obtained = aoc_val_u64(obtained), .expected = aoc_val_u64(expected)};
+    return (t_aoc_result){.status = AOC_OK, .obtained = aoc_val_u64(obtained), .expected = aoc_val_u64(expected)};
 }
 
 static inline t_aoc_result aoc_result_f32(float obtained, float expected)
 {
-    return (t_aoc_result){.status = AOC_SUCCESS, .obtained = aoc_val_f32(obtained), .expected = aoc_val_f32(expected)};
+    return (t_aoc_result){.status = AOC_OK, .obtained = aoc_val_f32(obtained), .expected = aoc_val_f32(expected)};
 }
 
 static inline t_aoc_result aoc_result_f64(double obtained, double expected)
 {
-    return (t_aoc_result){.status = AOC_SUCCESS, .obtained = aoc_val_f64(obtained), .expected = aoc_val_f64(expected)};
+    return (t_aoc_result){.status = AOC_OK, .obtained = aoc_val_f64(obtained), .expected = aoc_val_f64(expected)};
 }
 
 static inline t_aoc_result aoc_result_notimpl(void)
@@ -208,16 +208,20 @@ static void aoc_solve_start(int day, int part)
 static void aoc_solve_end(t_aoc_result result)
 {
     v_aoc_timer.end_time = clock();
+    double elapsed = (double)(v_aoc_timer.end_time - v_aoc_timer.start_time) / CLOCKS_PER_SEC;
 
     switch (result.status)
     {
-    case AOC_SUCCESS:
+    case AOC_OK:
         aoc_print_value("Obtained", result.obtained);
 #ifdef TEST
         aoc_print_value("Expected", result.expected);
 #endif
-        double elapsed = (double)(v_aoc_timer.end_time - v_aoc_timer.start_time) / CLOCKS_PER_SEC;
         printf("Execution time : %.6f s\n", elapsed);
+        break;
+
+    case AOC_ERROR:
+        LOG_ERROR("An error occured.");
         break;
 
     case AOC_NOTIMPL:

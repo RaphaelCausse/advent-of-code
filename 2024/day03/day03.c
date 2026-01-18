@@ -16,7 +16,7 @@
 
 /***** Functions *************************************************************/
 
-t_aoc_status aoc_read_input(void)
+t_aoc_result aoc_read_input(void)
 {
     FILE *input_file = NULL;
 
@@ -24,11 +24,11 @@ t_aoc_status aoc_read_input(void)
     if (NULL == input_file)
     {
         LOG_ERROR_FILE();
-        return AOC_ERROR;
+        return aoc_result_error();
     }
 
     fclose(input_file);
-    return AOC_NOTIMPL; /* Not implemented */
+    return aoc_result_notimpl(); /* Not implemented */
 }
 
 t_aoc_result aoc_solve_part_one(void)

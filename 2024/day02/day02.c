@@ -26,7 +26,7 @@ size_t report_lengths[MAX_REPORTS] = {0};
 
 /***** Functions *************************************************************/
 
-t_aoc_status aoc_read_input(void)
+t_aoc_result aoc_read_input(void)
 {
     FILE *input_file = NULL;
     size_t num_levels = 0;
@@ -35,7 +35,7 @@ t_aoc_status aoc_read_input(void)
     if (NULL == input_file)
     {
         LOG_ERROR_FILE();
-        return AOC_ERROR;
+        return aoc_result_error();
     }
 
     while (!feof(input_file))
@@ -58,7 +58,7 @@ t_aoc_status aoc_read_input(void)
     }
 
     fclose(input_file);
-    return AOC_SUCCESS;
+    return aoc_result_ok();
 }
 
 bool is_report_safe(int32_t levels[], size_t num_levels)
